@@ -1,0 +1,1859 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Konoba De Loro — tradicionalna otočka konoba na Pašmanu. Svježa riba, peka, domaće vino. Otok Pašman, Zadar.">
+  <title>Konoba De Loro · Pašman</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&family=Spectral:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── RESET & BASE ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: auto; }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; border: none; background: none; }
+
+    /* ─── DESIGN TOKENS ────────────────────────────────────────── */
+    :root {
+      --parchment:   #F6F2E8;
+      --parchment-2: #EDE8D8;
+      --ink:         #2F2B24;
+      --olive:       #607248;
+      --olive-soft:  #849B60;
+      --sage:        #A8B890;
+      --terra:       #B5724A;
+      --stone:       #9B8E7C;
+      --line:        rgba(47,43,36,0.13);
+
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body:    'Spectral', Georgia, serif;
+
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --transition: 0.4s var(--ease-out);
+    }
+
+    /* ─── BODY & GRAIN ─────────────────────────────────────────── */
+    body {
+      font-family: var(--font-body);
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--ink);
+      background-color: var(--parchment);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      opacity: 0.04;
+      mix-blend-mode: multiply;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    header.site, main, footer.site { position: relative; z-index: 2; }
+
+    /* ─── TYPOGRAPHY ───────────────────────────────────────────── */
+    h1, h2, h3, h4 {
+      font-family: var(--font-display);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--ink);
+    }
+
+    h1 { font-size: clamp(48px, 7vw, 88px); letter-spacing: -0.01em; }
+    h2 { font-size: clamp(34px, 4.5vw, 58px); letter-spacing: -0.01em; }
+    h3 { font-size: clamp(22px, 2.5vw, 30px); }
+
+    .eyebrow {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--olive);
+      margin-bottom: 14px;
+    }
+
+    .italic-tagline {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(18px, 2vw, 24px);
+      color: var(--stone);
+      font-weight: 400;
+    }
+
+    p { font-weight: 300; }
+
+    /* ─── LAYOUT HELPERS ───────────────────────────────────────── */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 clamp(20px, 5vw, 80px);
+    }
+
+    .section-pad { padding: clamp(72px, 10vw, 140px) 0; }
+    .section-alt { background-color: var(--parchment-2); }
+
+    /* ─── OLIVE BRANCH DIVIDER ─────────────────────────────────── */
+    .olive-rule {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin: 0 auto 44px;
+    }
+    .olive-rule svg { width: 80px; height: 22px; flex-shrink: 0; }
+    .olive-rule span {
+      height: 1px;
+      width: 64px;
+      background: linear-gradient(90deg, transparent, #849B60);
+      flex-shrink: 0;
+    }
+    .olive-rule span:last-child {
+      background: linear-gradient(90deg, #849B60, transparent);
+    }
+
+    /* ─── SEPIA IMAGE FILTER ───────────────────────────────────── */
+    .img-sepia {
+      filter: sepia(0.2) contrast(1.04) saturate(0.92);
+      transition: filter var(--transition);
+    }
+    .img-sepia:hover { filter: sepia(0.1) contrast(1.06) saturate(1.0); }
+
+    /* ─── REVEAL ANIMATION BASE ────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+    }
+
+    /* ─────────────────────────────────────────────────────────── */
+    /* 1. HEADER                                                    */
+    /* ─────────────────────────────────────────────────────────── */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(20px, 5vw, 64px);
+      height: 76px;
+      transition: background-color 0.5s var(--ease-out), box-shadow 0.5s var(--ease-out);
+    }
+
+    .site-header.scrolled {
+      background-color: var(--parchment);
+      box-shadow: 0 1px 0 var(--line);
+    }
+
+    .header-logo {
+      font-family: var(--font-display);
+      font-size: 19px;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: 0.02em;
+      flex-shrink: 0;
+    }
+    .header-logo em {
+      font-style: italic;
+      color: var(--olive);
+    }
+
+    .header-nav {
+      display: flex;
+      align-items: center;
+      gap: clamp(18px, 2.5vw, 36px);
+    }
+    .header-nav a {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      opacity: 0.75;
+      transition: opacity 0.25s;
+      position: relative;
+    }
+    .header-nav a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: var(--olive);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.3s var(--ease-out);
+    }
+    .header-nav a:hover { opacity: 1; }
+    .header-nav a:hover::after { transform: scaleX(1); }
+
+    .btn-reserve {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--olive);
+      border: 1px solid var(--olive);
+      padding: 9px 20px;
+      border-radius: 2px;
+      transition: background-color 0.3s, color 0.3s;
+      white-space: nowrap;
+    }
+    .btn-reserve:hover {
+      background-color: var(--olive);
+      color: var(--parchment);
+    }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      padding: 8px;
+      cursor: pointer;
+      z-index: 1010;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--ink);
+      transition: transform 0.4s, opacity 0.3s;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+    /* Mobile overlay menu */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      z-index: 1000;
+      background-color: var(--parchment);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 32px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s var(--ease-out);
+    }
+    .mobile-menu.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .mobile-menu a {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 7vw, 40px);
+      color: var(--ink);
+      font-weight: 400;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.4s, transform 0.4s;
+    }
+    .mobile-menu.open a {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .mobile-menu.open a:nth-child(1) { transition-delay: 0.05s; }
+    .mobile-menu.open a:nth-child(2) { transition-delay: 0.10s; }
+    .mobile-menu.open a:nth-child(3) { transition-delay: 0.15s; }
+    .mobile-menu.open a:nth-child(4) { transition-delay: 0.20s; }
+    .mobile-menu.open a:nth-child(5) { transition-delay: 0.25s; }
+    .mobile-menu .mobile-menu-btn {
+      margin-top: 12px;
+    }
+
+    @media (max-width: 900px) {
+      .header-nav, .btn-reserve { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    /* ─────────────────────────────────────────────────────────── */
+    /* 2. HERO                                                      */
+    /* ─────────────────────────────────────────────────────────── */
+    .hero {
+      padding-top: 140px;
+      padding-bottom: clamp(60px, 8vw, 100px);
+      background-color: var(--parchment);
+    }
+
+    .hero-inner { text-align: center; }
+
+    .hero-eyebrow {
+      font-family: var(--font-body);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--olive-soft);
+      margin-bottom: 20px;
+    }
+
+    .hero-h1 {
+      font-family: var(--font-display);
+      font-size: clamp(52px, 8vw, 100px);
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 18px;
+    }
+
+    .hero-h1 .word {
+      display: inline-block;
+      overflow: hidden;
+    }
+    .hero-h1 .word-inner {
+      display: inline-block;
+    }
+
+    .hero-tagline-main {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: clamp(18px, 2.2vw, 26px);
+      color: var(--stone);
+      font-weight: 400;
+      margin-bottom: clamp(40px, 6vw, 72px);
+    }
+
+    /* 4-image editorial grid */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 220px);
+      gap: 10px;
+      margin-bottom: 28px;
+    }
+
+    .hero-grid-item {
+      overflow: hidden;
+      border-radius: 2px;
+    }
+
+    .hero-grid-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.7s var(--ease-out);
+    }
+
+    .hero-grid-item:hover img { transform: scale(1.04); }
+
+    .hero-grid-item--large {
+      grid-column: 1 / 3;
+      grid-row: 1 / 3;
+    }
+
+    .hero-grid-item:nth-child(2) { grid-column: 3; grid-row: 1; }
+    .hero-grid-item:nth-child(3) { grid-column: 4; grid-row: 1; }
+    .hero-grid-item:nth-child(4) { grid-column: 3 / 5; grid-row: 2; }
+
+    .hero-location {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 15px;
+      color: var(--stone);
+      letter-spacing: 0.04em;
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 768px) {
+      .hero-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 180px 140px 140px;
+        gap: 8px;
+      }
+      .hero-grid-item--large {
+        grid-column: 1 / 3;
+        grid-row: 1;
+      }
+      .hero-grid-item:nth-child(2) { grid-column: 1; grid-row: 2; }
+      .hero-grid-item:nth-child(3) { grid-column: 2; grid-row: 2; }
+      .hero-grid-item:nth-child(4) { grid-column: 1 / 3; grid-row: 3; }
+    }
+
+    /* ─────────────────────────────────────────────────────────── */
+    /* 3. NAŠA PRIČA                                               */
+    /* ─────────────────────────────────────────────────────────── */
+    .story-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 6vw, 96px);
+      align-items: center;
+    }
+
+    .story-text {}
+
+    .story-text h2 { margin-bottom: 24px; }
+
+    .story-text p {
+      color: var(--stone);
+      margin-bottom: 20px;
+      font-size: 16.5px;
+      line-height: 1.8;
+    }
+
+    .story-image-wrap {
+      overflow: hidden;
+      border-radius: 2px;
+      aspect-ratio: 7/9;
+    }
+
+    .story-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @media (max-width: 768px) {
+      .story-grid {
+        grid-template-columns: 1fr;
+      }
+      .story-image-wrap {
+        aspect-ratio: 4/3;
+      }
+    }
+
+    /* ─────────────────────────────────────────────────────────── */
+    /* 4. JELOVNIK                                                  */
+    /* ─────────────────────────────────────────────────────────── */
+    .menu-header { text-align: center; margin-bottom: clamp(40px, 5vw, 60px); }
+    .menu-header h2 { margin-bottom: 10px; }
+    .menu-header .italic-tagline { margin-top: 10px; }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(24px, 4vw, 60px) clamp(32px, 6vw, 80px);
+    }
+
+    .menu-section {}
+
+    .menu-section-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--olive);
+      letter-spacing: 0.03em;
+      padding-bottom: 10px;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .menu-item-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--sage);
+      flex-shrink: 0;
+      margin-top: 9px;
+    }
+
+    .menu-item-name {
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 16px;
+      color: var(--ink);
+    }
+
+    .menu-note {
+      text-align: center;
+      margin-top: clamp(32px, 4vw, 52px);
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 15.5px;
+      color: var(--stone);
+    }
+
+    @media (max-width: 640px) {
+      .menu-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─────────────────────────────────────────────────────────── */
+    /* 5. VRIJEDNOSTI                                               */
+    /* ─────────────────────────────────────────────────────────── */
+    .values-header { text-align: center; margin-bottom: clamp(40px, 5vw, 64px); }
+    .values-header h2 { margin-bottom: 10px; }
+
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+    }
+
+    .value-card {
+      background: var(--parchment);
+      padding: clamp(28px, 4vw, 52px) clamp(20px, 3vw, 36px);
+      border: 1px solid var(--line);
+    }
+
+    .value-number {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      color: var(--olive-soft);
+      margin-bottom: 20px;
+    }
+
+    .value-icon {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 20px;
+    }
+
+    .value-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+
+    .value-desc {
+      font-family: var(--font-body);
+      font-weight: 300;
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--stone);
+    }
+
+    @media (max-width: 900px) {
+      .values-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 560px) {
+      .values-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─────────────────────────────────────────────────────────── */
+    /* 6. OTOK PAŠMAN                                               */
+    /* ─────────────────────────────────────────────────────────── */
+    .island-header { text-align: center; margin-bottom: 0; }
+    .island-header h2 { margin-bottom: 16px; }
+
+    .island-image-wrap {
+      margin: clamp(32px, 4vw, 52px) 0;
+      overflow: hidden;
+      border-radius: 2px;
+      height: clamp(300px, 45vw, 560px);
+    }
+
+    .island-image-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      will-change: transform;
+    }
+
+    .island-body {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .island-body p {
+      color: var(--stone);
+      font-size: 16.5px;
+      line-height: 1.85;
+      margin-bottom: 16px;
+    }
+
+    .island-facts {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: clamp(24px, 4vw, 56px);
+      margin-top: clamp(32px, 4vw, 52px);
+      flex-wrap: wrap;
+    }
+
+    .island-fact {
+      text-align: center;
+    }
+
+    .island-fact-value {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 42px);
+      font-weight: 400;
+      color: var(--olive);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .island-fact-label {
+      font-family: var(--font-body);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--stone);
+      font-weight: 400;
+    }
+
+    .island-fact-divider {
+      width: 1px;
+      height: 48px;
+      background: var(--line);
+    }
+
+    @media (max-width: 560px) {
+      .island-fact-divider { display: none; }
+    }
+
+    /* ─────────────────────────────────────────────────────────── */
+    /* 7. GALERIJA                                                  */
+    /* ─────────────────────────────────────────────────────────── */
+    .gallery-header { text-align: center; margin-bottom: clamp(32px, 4vw, 52px); }
+    .gallery-header h2 { margin-top: 16px; }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: auto;
+      gap: 8px;
+    }
+
+    .gallery-item {
+      overflow: hidden;
+      border-radius: 2px;
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.7s var(--ease-out);
+    }
+
+    .gallery-item:hover img { transform: scale(1.05); }
+
+    /* wide spans 2 cols */
+    .gallery-item--wide { grid-column: span 2; }
+
+    /* tall spans 2 rows */
+    .gallery-item--tall { grid-row: span 2; }
+
+    /* fixed heights */
+    .gallery-item { height: 280px; }
+    .gallery-item--tall { height: auto; }
+
+    @media (max-width: 768px) {
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-item { height: 200px; }
+      .gallery-item--wide { grid-column: span 2; }
+      .gallery-item--tall { grid-row: span 1; height: 200px; }
+    }
+
+    @media (max-width: 480px) {
+      .gallery-grid { grid-template-columns: 1fr; }
+      .gallery-item, .gallery-item--wide, .gallery-item--tall {
+        grid-column: span 1;
+        grid-row: span 1;
+        height: 240px;
+      }
+    }
+
+    /* ─────────────────────────────────────────────────────────── */
+    /* 8. REZERVACIJE                                               */
+    /* ─────────────────────────────────────────────────────────── */
+    .reserve-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(40px, 6vw, 96px);
+      align-items: start;
+    }
+
+    .reserve-text h2 { margin-bottom: 20px; }
+
+    .reserve-text p {
+      color: var(--stone);
+      font-size: 16.5px;
+      line-height: 1.8;
+      margin-bottom: 28px;
+    }
+
+    .reserve-phone {
+      display: inline-block;
+      font-family: var(--font-display);
+      font-size: clamp(22px, 3vw, 32px);
+      font-weight: 400;
+      color: var(--olive);
+      letter-spacing: 0.02em;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 4px;
+      transition: color var(--transition), border-color var(--transition);
+    }
+    .reserve-phone:hover { color: var(--terra); border-color: var(--terra); }
+
+    .hours-card {
+      border: 1px solid var(--olive);
+      border-radius: 2px;
+      padding: clamp(28px, 4vw, 44px);
+      background: var(--parchment);
+    }
+
+    .hours-card-title {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--olive);
+      letter-spacing: 0.04em;
+      margin-bottom: 20px;
+    }
+
+    .hours-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--line);
+      font-size: 15.5px;
+    }
+    .hours-row:last-of-type { border-bottom: none; }
+
+    .hours-days { font-weight: 400; color: var(--ink); }
+    .hours-time { font-weight: 300; color: var(--stone); }
+
+    .hours-note {
+      margin-top: 18px;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 14.5px;
+      color: var(--stone);
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .reserve-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─────────────────────────────────────────────────────────── */
+    /* 9. LOKACIJA                                                  */
+    /* ─────────────────────────────────────────────────────────── */
+    .location-section { padding: 0; }
+
+    .location-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 480px;
+    }
+
+    .location-panel {
+      background-color: var(--parchment-2);
+      padding: clamp(48px, 7vw, 96px) clamp(32px, 5vw, 80px);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .location-panel h2 { margin-bottom: 18px; }
+
+    .location-panel p {
+      color: var(--stone);
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+
+    .location-address {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 17px;
+      color: var(--ink);
+      margin-top: 20px;
+      line-height: 1.6;
+    }
+
+    .location-phone-link {
+      display: inline-block;
+      margin-top: 10px;
+      font-family: var(--font-body);
+      font-size: 15px;
+      color: var(--olive);
+      letter-spacing: 0.06em;
+    }
+
+    .location-map {
+      position: relative;
+    }
+
+    .location-map iframe {
+      width: 100%;
+      height: 100%;
+      min-height: 480px;
+      border: none;
+      filter: sepia(0.3) contrast(0.95) saturate(0.8);
+    }
+
+    @media (max-width: 768px) {
+      .location-grid { grid-template-columns: 1fr; }
+      .location-map iframe { min-height: 340px; }
+    }
+
+    /* ─────────────────────────────────────────────────────────── */
+    /* 10. FOOTER                                                   */
+    /* ─────────────────────────────────────────────────────────── */
+    footer.site {
+      background-color: #1E2018;
+      color: rgba(246,242,232,0.75);
+      padding: clamp(52px, 7vw, 96px) 0 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: clamp(32px, 5vw, 72px);
+      padding-bottom: clamp(40px, 5vw, 64px);
+    }
+
+    .footer-brand {}
+
+    .footer-logo {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--parchment);
+      margin-bottom: 14px;
+    }
+    .footer-logo em {
+      font-style: italic;
+      color: var(--sage);
+    }
+
+    .footer-tagline {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 15px;
+      color: rgba(246,242,232,0.55);
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+
+    .footer-phone {
+      font-family: var(--font-body);
+      font-size: 14.5px;
+      color: var(--sage);
+      letter-spacing: 0.06em;
+    }
+
+    .footer-col-title {
+      font-family: var(--font-body);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(246,242,232,0.4);
+      margin-bottom: 18px;
+    }
+
+    .footer-nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-nav a {
+      font-family: var(--font-body);
+      font-size: 14.5px;
+      color: rgba(246,242,232,0.65);
+      transition: color 0.25s;
+    }
+    .footer-nav a:hover { color: var(--sage); }
+
+    .footer-hours {}
+
+    .footer-hours-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(246,242,232,0.07);
+      color: rgba(246,242,232,0.65);
+    }
+
+    .footer-hours-note {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 13px;
+      color: rgba(246,242,232,0.4);
+      margin-top: 14px;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(246,242,232,0.07);
+      padding: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: rgba(246,242,232,0.35);
+      letter-spacing: 0.06em;
+    }
+
+    .footer-olive-accent {
+      color: var(--sage);
+    }
+
+    @media (max-width: 768px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .footer-brand { grid-column: 1 / 3; }
+    }
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-brand { grid-column: 1; }
+    }
+
+    /* ─────────────────────────────────────────────────────────── */
+    /* 11. MOBILE STICKY BAR                                        */
+    /* ─────────────────────────────────────────────────────────── */
+    .mobile-sticky-bar {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 800;
+      background-color: var(--olive);
+      color: var(--parchment);
+      text-align: center;
+      padding: 14px 20px;
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .mobile-sticky-bar a {
+      color: var(--parchment);
+    }
+
+    @media (max-width: 900px) {
+      .mobile-sticky-bar { display: block; }
+      body { padding-bottom: 54px; }
+    }
+
+    /* ─────────────────────────────────────────────────────────── */
+    /* OLIVE BRANCH DIVIDER (positioned within section)             */
+    /* ─────────────────────────────────────────────────────────── */
+    .section-divider-wrap {
+      padding-top: clamp(48px, 6vw, 80px);
+    }
+
+    /* Word-split for hero h1 */
+    .word { display: inline-block; overflow: hidden; }
+    .word-inner { display: inline-block; }
+
+    /* Scrollbar styling */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--parchment); }
+    ::-webkit-scrollbar-thumb { background: var(--sage); border-radius: 3px; }
+
+    /* prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1 !important; transform: none !important; }
+      * { animation: none !important; transition: color 0.15s, background-color 0.15s, border-color 0.15s !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- HEADER                                                      -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <header class="site-header site" id="site-header">
+    <a href="#" class="header-logo" aria-label="Konoba De Loro – početna">
+      Konoba <em>De Loro</em>
+    </a>
+
+    <nav class="header-nav" aria-label="Glavna navigacija">
+      <a href="#o-nama">O nama</a>
+      <a href="#jelovnik">Jelovnik</a>
+      <a href="#pasman">Pašman</a>
+      <a href="#galerija">Galerija</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+
+    <a href="tel:+38523260064" class="btn-reserve">Rezerviraj stol</a>
+
+    <button class="hamburger" id="hamburger" aria-label="Otvori izbornik" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Navigacijski izbornik">
+    <a href="#o-nama" class="mobile-menu-link">O nama</a>
+    <a href="#jelovnik" class="mobile-menu-link">Jelovnik</a>
+    <a href="#pasman" class="mobile-menu-link">Pašman</a>
+    <a href="#galerija" class="mobile-menu-link">Galerija</a>
+    <a href="#kontakt" class="mobile-menu-link">Kontakt</a>
+    <a href="tel:+38523260064" class="btn-reserve mobile-menu-btn">Rezerviraj stol</a>
+  </div>
+
+  <main>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- 2. HERO                                                     -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <section class="hero" id="pocetna" aria-label="Uvod — Konoba De Loro">
+      <div class="container">
+        <div class="hero-inner">
+
+          <p class="hero-eyebrow">Otok Pašman &middot; Tradicija &middot; More</p>
+
+          <h1 class="hero-h1" id="hero-h1">Konoba De Loro</h1>
+
+          <p class="hero-tagline-main">Gdje otočka tišina jede za stolom.</p>
+
+          <!-- 4-image editorial grid -->
+          <div class="hero-grid" id="hero-grid">
+
+            <div class="hero-grid-item hero-grid-item--large">
+              <img
+                src="https://loremflickr.com/900/600/pasman,island?lock=801"
+                alt="Pogled na otok Pašman — more i stjenovita obala"
+                class="img-sepia"
+                loading="eager"
+                width="900" height="600">
+            </div>
+
+            <div class="hero-grid-item">
+              <img
+                src="https://loremflickr.com/600/400/olive,grove?lock=802"
+                alt="Maslinov gaj — domaće masline Konobe De Loro"
+                class="img-sepia"
+                loading="eager"
+                width="600" height="400">
+            </div>
+
+            <div class="hero-grid-item">
+              <img
+                src="https://loremflickr.com/600/400/grilled,fish?lock=803"
+                alt="Riba s gradela — tradicionalna priprema svježe ribe"
+                class="img-sepia"
+                loading="eager"
+                width="600" height="400">
+            </div>
+
+            <div class="hero-grid-item">
+              <img
+                src="https://loremflickr.com/600/400/konoba,rustic?lock=804"
+                alt="Rustikalna atmosfera Konobe De Loro"
+                class="img-sepia"
+                loading="eager"
+                width="600" height="400">
+            </div>
+
+          </div><!-- /.hero-grid -->
+
+          <p class="hero-location">Pašman, Zadar &nbsp;·&nbsp; Otvoreni travanj – rujan</p>
+
+        </div><!-- /.hero-inner -->
+      </div><!-- /.container -->
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- 3. NAŠA PRIČA                                              -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <section class="section-alt section-pad" id="o-nama" aria-labelledby="story-heading">
+      <div class="container">
+
+        <div class="section-divider-wrap" style="padding-top:0; margin-bottom: clamp(40px,5vw,64px)">
+          <div class="olive-rule">
+            <span></span>
+            <svg viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M40 10 C30 4 18 2 8 8" stroke="#607248" stroke-width="1" stroke-linecap="round"/>
+              <path d="M40 10 C50 4 62 2 72 8" stroke="#607248" stroke-width="1" stroke-linecap="round"/>
+              <ellipse cx="20" cy="6" rx="5" ry="3" transform="rotate(-20 20 6)" fill="#849B60" opacity="0.6"/>
+              <ellipse cx="60" cy="6" rx="5" ry="3" transform="rotate(20 60 6)" fill="#849B60" opacity="0.6"/>
+              <circle cx="40" cy="10" r="2" fill="#607248"/>
+            </svg>
+            <span></span>
+          </div>
+        </div>
+
+        <div class="story-grid">
+
+          <div class="story-text reveal">
+            <p class="eyebrow">Naša priča</p>
+            <h2 id="story-heading">Otok koji uči strpljenju</h2>
+
+            <p>Konoba De Loro nije nastala planiranjem — nastala je polako, kao što sve na Pašmanu nastaje. Iz obiteljske kuhinje, iz mreže koja svako jutro izlazi na Pašmanski kanal, iz maslina koje su ovdje bile dulje nego ijedno ime na natpisu.</p>
+
+            <p>Riba dolazi ujutro. Peka treba tri sata. Stol je posvećen jelu, ne žurbi. Ovdje nema buke ni mode — samo kamen, more i miris žara koji se nosi prema pinijama.</p>
+
+            <p>Između Pašmana i Kornatskog arhipelaga leži jedan od najbogatijih ribolovnih kanala na Jadranu. Tu lovimo brancina, komarču i zubatca — onoga jutra kada ih bacimo na gradele, oni su još uvijek more.</p>
+
+            <p>Dobrodošli za naš stol. Nema žurbe. Pašman ne žuri nikad.</p>
+          </div>
+
+          <div class="story-image-wrap reveal">
+            <img
+              src="https://loremflickr.com/700/900/stone,tavern?lock=805"
+              alt="Kameni zidovi Konobe De Loro — rustikalni interijer s tradicijskim detaljima"
+              class="img-sepia"
+              loading="lazy"
+              width="700" height="900">
+          </div>
+
+        </div><!-- /.story-grid -->
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- 4. JELOVNIK                                                 -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <section class="section-pad" id="jelovnik" aria-labelledby="menu-heading">
+      <div class="container">
+
+        <div class="menu-header reveal">
+          <p class="eyebrow">Jelovnik</p>
+          <div class="olive-rule" style="margin-bottom: 20px;">
+            <span></span>
+            <svg viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M40 10 C30 4 18 2 8 8" stroke="#607248" stroke-width="1" stroke-linecap="round"/>
+              <path d="M40 10 C50 4 62 2 72 8" stroke="#607248" stroke-width="1" stroke-linecap="round"/>
+              <ellipse cx="20" cy="6" rx="5" ry="3" transform="rotate(-20 20 6)" fill="#849B60" opacity="0.6"/>
+              <ellipse cx="60" cy="6" rx="5" ry="3" transform="rotate(20 60 6)" fill="#849B60" opacity="0.6"/>
+              <circle cx="40" cy="10" r="2" fill="#607248"/>
+            </svg>
+            <span></span>
+          </div>
+          <h2 id="menu-heading">Od otočkog ognjišta</h2>
+          <p class="italic-tagline">Sezonski jelovnik prema ulovu i berbi</p>
+        </div>
+
+        <div class="menu-grid reveal">
+
+          <div class="menu-section">
+            <h3 class="menu-section-title">Morski početak</h3>
+            <div class="menu-item">
+              <span class="menu-item-dot" aria-hidden="true"></span>
+              <span class="menu-item-name">Dagnje na brujet</span>
+            </div>
+            <div class="menu-item">
+              <span class="menu-item-dot" aria-hidden="true"></span>
+              <span class="menu-item-name">Lignje na gradela</span>
+            </div>
+            <div class="menu-item">
+              <span class="menu-item-dot" aria-hidden="true"></span>
+              <span class="menu-item-name">Hobotnica u salati</span>
+            </div>
+            <div class="menu-item">
+              <span class="menu-item-dot" aria-hidden="true"></span>
+              <span class="menu-item-name">Crni rižoto</span>
+            </div>
+          </div>
+
+          <div class="menu-section">
+            <h3 class="menu-section-title">Ribe s gradela</h3>
+            <div class="menu-item">
+              <span class="menu-item-dot" aria-hidden="true"></span>
+              <span class="menu-item-name">Brancin</span>
+            </div>
+            <div class="menu-item">
+              <span class="menu-item-dot" aria-hidden="true"></span>
+              <span class="menu-item-name">Komarča</span>
+            </div>
+            <div class="menu-item">
+              <span class="menu-item-dot" aria-hidden="true"></span>
+              <span class="menu-item-name">Zubatac</span>
+            </div>
+            <div class="menu-item">
+              <span class="menu-item-dot" aria-hidden="true"></span>
+              <span class="menu-item-name">Špar</span>
+            </div>
+          </div>
+
+          <div class="menu-section">
+            <h3 class="menu-section-title">Ispod peke</h3>
+            <div class="menu-item">
+              <span class="menu-item-dot" aria-hidden="true"></span>
+              <span class="menu-item-name">Janjetina ispod peke</span>
+            </div>
+            <div class="menu-item">
+              <span class="menu-item-dot" aria-hidden="true"></span>
+              <span class="menu-item-name">Miješano meso ispod peke</span>
+            </div>
+          </div>
+
+          <div class="menu-section">
+            <h3 class="menu-section-title">Domaće</h3>
+            <div class="menu-item">
+              <span class="menu-item-dot" aria-hidden="true"></span>
+              <span class="menu-item-name">Pašticada s njokima</span>
+            </div>
+            <div class="menu-item">
+              <span class="menu-item-dot" aria-hidden="true"></span>
+              <span class="menu-item-name">Domaći sir</span>
+            </div>
+            <div class="menu-item">
+              <span class="menu-item-dot" aria-hidden="true"></span>
+              <span class="menu-item-name">Sezonska salata</span>
+            </div>
+          </div>
+
+        </div><!-- /.menu-grid -->
+
+        <p class="menu-note reveal">
+          Jela se mijenjaju prema dnevnom ulovu i sezoni. Molimo najavite peku dan ranije.
+        </p>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- 5. VRIJEDNOSTI                                              -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <section class="section-alt section-pad" id="vrijednosti" aria-labelledby="values-heading">
+      <div class="container">
+
+        <div class="values-header reveal">
+          <p class="eyebrow">Filozofija konobe</p>
+          <h2 id="values-heading">Četiri otočke vrijednosti</h2>
+        </div>
+
+        <div class="values-grid">
+
+          <div class="value-card reveal">
+            <p class="value-number">01</p>
+            <svg class="value-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M18 4 C10 8 6 16 10 26" stroke="#607248" stroke-width="1.2" stroke-linecap="round"/>
+              <path d="M18 4 C26 8 30 16 26 26" stroke="#607248" stroke-width="1.2" stroke-linecap="round"/>
+              <path d="M10 26 Q18 32 26 26" stroke="#849B60" stroke-width="1" stroke-linecap="round"/>
+              <circle cx="18" cy="14" r="3.5" stroke="#607248" stroke-width="1.2"/>
+            </svg>
+            <h3 class="value-title">Svježe</h3>
+            <p class="value-desc">Riba iz Pašmanskog kanala, ujutro ulovljena. Nema zamrzivača između mora i tanjura.</p>
+          </div>
+
+          <div class="value-card reveal">
+            <p class="value-number">02</p>
+            <svg class="value-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <ellipse cx="18" cy="10" rx="7" ry="4" stroke="#607248" stroke-width="1.2"/>
+              <path d="M11 10 L8 28" stroke="#607248" stroke-width="1.2" stroke-linecap="round"/>
+              <path d="M25 10 L28 28" stroke="#607248" stroke-width="1.2" stroke-linecap="round"/>
+              <path d="M8 28 L28 28" stroke="#849B60" stroke-width="1" stroke-linecap="round"/>
+              <path d="M14 16 C14 20 22 20 22 16" stroke="#849B60" stroke-width="1" stroke-linecap="round"/>
+            </svg>
+            <h3 class="value-title">Domaće</h3>
+            <p class="value-desc">Maslinovo ulje, vino i povrće s otočkih imanja. Sve što možemo — uzgajamo ili kupujemo od susjeda.</p>
+          </div>
+
+          <div class="value-card reveal">
+            <p class="value-number">03</p>
+            <svg class="value-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <circle cx="18" cy="18" r="12" stroke="#607248" stroke-width="1.2"/>
+              <path d="M18 10 L18 18 L24 22" stroke="#849B60" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="18" cy="18" r="1.5" fill="#607248"/>
+            </svg>
+            <h3 class="value-title">Polako</h3>
+            <p class="value-desc">Peka traži tri sata. I stol treba biti posvećen jelu. Nema žurbe — to je osnova otočke gostoljubivosti.</p>
+          </div>
+
+          <div class="value-card reveal">
+            <p class="value-number">04</p>
+            <svg class="value-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M6 28 Q12 8 18 12 Q24 16 30 6" stroke="#607248" stroke-width="1.2" stroke-linecap="round"/>
+              <path d="M10 32 Q18 20 26 24 Q30 26 32 18" stroke="#849B60" stroke-width="1" stroke-linecap="round" opacity="0.7"/>
+              <circle cx="18" cy="12" r="2.5" fill="#607248" opacity="0.4"/>
+            </svg>
+            <h3 class="value-title">Otočki</h3>
+            <p class="value-desc">Pašman nije Zadar. Nije Biograd. Pašman je Pašman — i to je dovoljno. Možda više nego dovoljno.</p>
+          </div>
+
+        </div><!-- /.values-grid -->
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- 6. OTOK PAŠMAN                                             -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <section class="section-pad" id="pasman" aria-labelledby="island-heading">
+      <div class="container">
+
+        <div class="island-header reveal">
+          <p class="eyebrow">Otok Pašman</p>
+          <h2 id="island-heading">Zeleni otok u Zadarskom arhipelagu</h2>
+        </div>
+
+        <div class="olive-rule reveal" style="margin-top: 28px;">
+          <span></span>
+          <svg viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M40 10 C30 4 18 2 8 8" stroke="#607248" stroke-width="1" stroke-linecap="round"/>
+            <path d="M40 10 C50 4 62 2 72 8" stroke="#607248" stroke-width="1" stroke-linecap="round"/>
+            <ellipse cx="20" cy="6" rx="5" ry="3" transform="rotate(-20 20 6)" fill="#849B60" opacity="0.6"/>
+            <ellipse cx="60" cy="6" rx="5" ry="3" transform="rotate(20 60 6)" fill="#849B60" opacity="0.6"/>
+            <circle cx="40" cy="10" r="2" fill="#607248"/>
+          </svg>
+          <span></span>
+        </div>
+
+        <div class="island-image-wrap" id="island-img-wrap">
+          <img
+            src="https://loremflickr.com/800/600/adriatic,island?lock=806"
+            alt="Otok Pašman — pogled iz zraka na zelenilo i Jadransko more"
+            class="img-sepia"
+            id="island-img"
+            loading="lazy"
+            width="800" height="600">
+        </div>
+
+        <div class="island-body reveal">
+          <p>Pašman leži u Zadarskom arhipelagu, spojen mostom s otokom Ugljanom, a trajektom s Biogradom na Moru. Maslinici i borove šume pokrivaju veći dio otoka — između njih, tihe uvale i kamena sela koja su stotljećima živjela od mora i maslina.</p>
+
+          <p>Na uzvišenju Ćokovac stoji benediktinski samostan Sv. Duje, jedan od simbola otoka i svjedok dalmatinske duhovne tradicije. Pašmanski kanal, koji odvaja otok od kopna, jedan je od najbogatijih ribolovnih područja sjevernog Jadrana.</p>
+
+          <p>Pašman je prirodna baza za jedriličare koji plove prema Kornatskom arhipelagu. Tko jednom ostane na otoku, uvijek se vrati.</p>
+
+          <div class="island-facts">
+            <div class="island-fact">
+              <div class="island-fact-value">17 km²</div>
+              <div class="island-fact-label">Površina otoka</div>
+            </div>
+            <div class="island-fact-divider" aria-hidden="true"></div>
+            <div class="island-fact">
+              <div class="island-fact-value">~800</div>
+              <div class="island-fact-label">Otočana</div>
+            </div>
+            <div class="island-fact-divider" aria-hidden="true"></div>
+            <div class="island-fact">
+              <div class="island-fact-value">Kornati</div>
+              <div class="island-fact-label">U blizini</div>
+            </div>
+          </div>
+
+        </div><!-- /.island-body -->
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- 7. GALERIJA                                                 -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <section class="section-alt section-pad" id="galerija" aria-labelledby="gallery-heading">
+      <div class="container">
+
+        <div class="gallery-header reveal">
+          <div class="olive-rule" style="margin-bottom: 20px;">
+            <span></span>
+            <svg viewBox="0 0 80 20" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M40 10 C30 4 18 2 8 8" stroke="#607248" stroke-width="1" stroke-linecap="round"/>
+              <path d="M40 10 C50 4 62 2 72 8" stroke="#607248" stroke-width="1" stroke-linecap="round"/>
+              <ellipse cx="20" cy="6" rx="5" ry="3" transform="rotate(-20 20 6)" fill="#849B60" opacity="0.6"/>
+              <ellipse cx="60" cy="6" rx="5" ry="3" transform="rotate(20 60 6)" fill="#849B60" opacity="0.6"/>
+              <circle cx="40" cy="10" r="2" fill="#607248"/>
+            </svg>
+            <span></span>
+          </div>
+          <p class="eyebrow">Galerija</p>
+          <h2 id="gallery-heading">Slike otočkog stola</h2>
+        </div>
+
+        <div class="gallery-grid" id="gallery-grid">
+
+          <div class="gallery-item">
+            <img
+              src="https://loremflickr.com/700/500/konoba,rustic?lock=807"
+              alt="Rustikalni interijer konobe — kameni zidovi i drveni stolovi"
+              class="img-sepia"
+              loading="lazy"
+              width="700" height="500">
+          </div>
+
+          <div class="gallery-item gallery-item--tall" style="height: auto;">
+            <img
+              src="https://loremflickr.com/500/700/peka,lamb?lock=808"
+              alt="Janjetina ispod peke — tradicionalna dalmatinska priprema"
+              class="img-sepia"
+              loading="lazy"
+              style="height: 100%; min-height: 280px;"
+              width="500" height="700">
+          </div>
+
+          <div class="gallery-item">
+            <img
+              src="https://loremflickr.com/700/500/grilled,fish?lock=809"
+              alt="Svježa riba s gradela — dnevni ulov Pašmanskog kanala"
+              class="img-sepia"
+              loading="lazy"
+              width="700" height="500">
+          </div>
+
+          <div class="gallery-item gallery-item--wide">
+            <img
+              src="https://loremflickr.com/900/500/pasman,island?lock=810"
+              alt="Panoramski pogled na otok Pašman i Jadransko more"
+              class="img-sepia"
+              loading="lazy"
+              width="900" height="500">
+          </div>
+
+          <div class="gallery-item">
+            <img
+              src="https://loremflickr.com/500/500/olive,grove?lock=811"
+              alt="Maslinov gaj na Pašmanu — izvor domaćeg maslinovog ulja"
+              class="img-sepia"
+              loading="lazy"
+              width="500" height="500">
+          </div>
+
+          <div class="gallery-item">
+            <img
+              src="https://loremflickr.com/700/500/adriatic,island?lock=812"
+              alt="Uvala na Pašmanu — kristalno more i kamenita obala"
+              class="img-sepia"
+              loading="lazy"
+              width="700" height="500">
+          </div>
+
+        </div><!-- /.gallery-grid -->
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- 8. REZERVACIJE & RADNO VRIJEME                             -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <section class="section-pad" id="rezervacije" aria-labelledby="reserve-heading">
+      <div class="container">
+        <div class="reserve-grid">
+
+          <div class="reserve-text reveal">
+            <p class="eyebrow">Rezervacije</p>
+            <h2 id="reserve-heading">Rezervirajte vaš stol na otoku</h2>
+            <p>Pašman je mali otok — a naša konoba još manja. Da bismo vam mogli posvetiti sav mir i pažnju koji ovaj otok zaslužuje, molimo rezervirajte stol unaprijed. Posebno ako planirate peku — ona traži dan najave.</p>
+            <p>Javite se telefonom — rado ćemo dogovoriti sve detalje i odgovoriti na svako pitanje o jelovniku i sezonskim specijalitetima.</p>
+            <a href="tel:+38523260064" class="reserve-phone">→ +385 23 260 064</a>
+          </div>
+
+          <div class="hours-card reveal">
+            <p class="hours-card-title">Radno Vrijeme</p>
+
+            <div class="hours-row">
+              <span class="hours-days">Ponedjeljak – Petak</span>
+              <span class="hours-time">11:00 – 22:00</span>
+            </div>
+            <div class="hours-row">
+              <span class="hours-days">Subota – Nedjelja</span>
+              <span class="hours-time">11:00 – 23:00</span>
+            </div>
+
+            <p class="hours-note">Konoba radi travanj – rujan. Zatvoreno u listopadu i studenom. Za zimske termine, javite se telefonom.</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- 9. LOKACIJA                                                 -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <section class="location-section" id="kontakt" aria-labelledby="location-heading">
+      <div class="location-grid">
+
+        <div class="location-panel">
+          <div class="container" style="padding: 0;">
+            <p class="eyebrow">Gdje smo</p>
+            <h2 id="location-heading">Pronađite nas<br>na Pašmanu</h2>
+            <p>Trajekt iz Biograda na Moru vozi do Tkona na jugu otoka. Od Tkona, prateći obalu prema sjeveru, dolazite do nas za oko dvadesetak minuta vožnje kroz maslinike.</p>
+            <p>Ako dolazite plovilom, možete pristati u lokalnoj luci — pitajte mještane za Konoba De Loro, svi nas znaju.</p>
+            <address style="font-style:normal;">
+              <p class="location-address">Pašman, 23262 Pašman<br>Hrvatska</p>
+              <a href="tel:+38523260064" class="location-phone-link">+385 23 260 064</a>
+            </address>
+          </div>
+        </div>
+
+        <div class="location-map">
+          <iframe
+            src="https://maps.google.com/maps?q=Konoba+De+Loro+Pasman&output=embed"
+            title="Lokacija Konobe De Loro na Google Maps"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- FOOTER                                                       -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <footer class="site" aria-label="Podnožje stranice">
+    <div class="container">
+      <div class="footer-grid">
+
+        <div class="footer-brand">
+          <div class="footer-logo">Konoba <em>De Loro</em></div>
+          <p class="footer-tagline">Gdje otočka tišina jede za stolom.<br>Pašman, Zadar — travanj do rujna.</p>
+          <a href="tel:+38523260064" class="footer-phone">+385 23 260 064</a>
+        </div>
+
+        <nav aria-label="Navigacija u podnožju">
+          <p class="footer-col-title">Navigacija</p>
+          <ul class="footer-nav">
+            <li><a href="#o-nama">O nama</a></li>
+            <li><a href="#jelovnik">Jelovnik</a></li>
+            <li><a href="#pasman">Otok Pašman</a></li>
+            <li><a href="#galerija">Galerija</a></li>
+            <li><a href="#rezervacije">Rezervacije</a></li>
+            <li><a href="#kontakt">Kontakt i lokacija</a></li>
+          </ul>
+        </nav>
+
+        <div class="footer-hours">
+          <p class="footer-col-title">Radno Vrijeme</p>
+          <div class="footer-hours-row">
+            <span>Pon – Pet</span>
+            <span>11:00 – 22:00</span>
+          </div>
+          <div class="footer-hours-row">
+            <span>Sub – Ned</span>
+            <span>11:00 – 23:00</span>
+          </div>
+          <div class="footer-hours-row">
+            <span>Sezona</span>
+            <span>Tra – Ruj</span>
+          </div>
+          <p class="footer-hours-note">Zatvoreno listopada i studenog.</p>
+        </div>
+
+      </div><!-- /.footer-grid -->
+    </div>
+
+    <div class="container">
+      <div class="footer-bottom">
+        <span>&copy; 2025 Konoba De Loro, Pašman</span>
+        <span class="footer-olive-accent">Pašman · Zadar · Hrvatska</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- MOBILE STICKY BAR                                           -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <div class="mobile-sticky-bar" role="complementary" aria-label="Rezervacija">
+    Rezerviraj stol &nbsp;·&nbsp; <a href="tel:+38523260064">+385 23 260 064</a>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <!-- SCRIPTS                                                     -->
+  <!-- ═══════════════════════════════════════════════════════════ -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+
+  <script>
+    (function () {
+      'use strict';
+
+      /* ─── REDUCED MOTION CHECK ─────────────────────────────── */
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* ─── LENIS SMOOTH SCROLL ──────────────────────────────── */
+      let lenis;
+      if (!prefersReduced) {
+        lenis = new Lenis({
+          duration: 1.2,
+          easing: function (t) { return Math.min(1, 1.001 - Math.pow(2, -10 * t)); },
+          orientation: 'vertical',
+          smoothWheel: true
+        });
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.ticker.add(function (time) { lenis.raf(time * 1000); });
+        gsap.ticker.lagSmoothing(0);
+        lenis.on('scroll', ScrollTrigger.update);
+      } else {
+        gsap.registerPlugin(ScrollTrigger);
+      }
+
+      /* ─── SMOOTH ANCHOR SCROLL ─────────────────────────────── */
+      document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+        anchor.addEventListener('click', function (e) {
+          var target = document.querySelector(this.getAttribute('href'));
+          if (!target) return;
+          e.preventDefault();
+          if (lenis) {
+            lenis.scrollTo(target, { offset: -76, duration: 1.4 });
+          } else {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+          // close mobile menu if open
+          closeMobileMenu();
+        });
+      });
+
+      /* ─── STICKY HEADER ────────────────────────────────────── */
+      var header = document.getElementById('site-header');
+      var lastScrollY = 0;
+
+      function onScroll() {
+        var scrollY = window.scrollY || window.pageYOffset;
+        if (scrollY > 60) {
+          header.classList.add('scrolled');
+        } else {
+          header.classList.remove('scrolled');
+        }
+        lastScrollY = scrollY;
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+
+      /* ─── MOBILE HAMBURGER MENU ────────────────────────────── */
+      var hamburger = document.getElementById('hamburger');
+      var mobileMenu = document.getElementById('mobile-menu');
+      var isMenuOpen = false;
+
+      function openMobileMenu() {
+        isMenuOpen = true;
+        hamburger.classList.add('open');
+        hamburger.setAttribute('aria-expanded', 'true');
+        mobileMenu.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeMobileMenu() {
+        isMenuOpen = false;
+        hamburger.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+        mobileMenu.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      hamburger.addEventListener('click', function () {
+        if (isMenuOpen) { closeMobileMenu(); } else { openMobileMenu(); }
+      });
+
+      // Close on ESC
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && isMenuOpen) closeMobileMenu();
+      });
+
+      /* ─── HERO H1 WORD-SPLIT REVEAL ────────────────────────── */
+      function splitAndAnimateHeroH1() {
+        var el = document.getElementById('hero-h1');
+        if (!el) return;
+        var text = el.textContent.trim();
+        var words = text.split(' ');
+        el.innerHTML = words.map(function (w) {
+          return '<span class="word"><span class="word-inner">' + w + '</span></span>';
+        }).join(' ');
+
+        var inners = el.querySelectorAll('.word-inner');
+        if (prefersReduced) {
+          inners.forEach(function (i) { i.style.transform = 'none'; i.style.opacity = 1; });
+          return;
+        }
+
+        gsap.set(inners, { yPercent: 110, opacity: 0 });
+        gsap.to(inners, {
+          yPercent: 0,
+          opacity: 1,
+          duration: 1.0,
+          stagger: 0.10,
+          ease: 'power3.out',
+          delay: 0.2
+        });
+      }
+
+      /* ─── HERO GRID STAGGER FADE-IN ────────────────────────── */
+      function animateHeroGrid() {
+        if (prefersReduced) return;
+        var items = document.querySelectorAll('#hero-grid .hero-grid-item img');
+        gsap.set(items, { opacity: 0, scale: 1.04 });
+        gsap.to(items, {
+          opacity: 1,
+          scale: 1,
+          duration: 0.9,
+          stagger: 0.12,
+          ease: 'power2.out',
+          delay: 0.35
+        });
+      }
+
+      /* ─── SECTION REVEALS ──────────────────────────────────── */
+      function initReveal() {
+        if (prefersReduced) {
+          document.querySelectorAll('.reveal').forEach(function (el) {
+            el.style.opacity = 1;
+            el.style.transform = 'none';
+          });
+          return;
+        }
+
+        document.querySelectorAll('.reveal').forEach(function (el) {
+          gsap.set(el, { opacity: 0, y: 22 });
+          ScrollTrigger.create({
+            trigger: el,
+            start: 'top 87%',
+            once: true,
+            onEnter: function () {
+              gsap.to(el, {
+                opacity: 1,
+                y: 0,
+                duration: 1.0,
+                ease: 'power3.out'
+              });
+            }
+          });
+        });
+      }
+
+      /* ─── ISLAND IMAGE PARALLAX ────────────────────────────── */
+      function initIslandParallax() {
+        if (prefersReduced) return;
+        var wrap = document.getElementById('island-img-wrap');
+        var img  = document.getElementById('island-img');
+        if (!wrap || !img) return;
+
+        gsap.set(img, { scale: 1.15 });
+        gsap.to(img, {
+          yPercent: 15,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: wrap,
+            start: 'top bottom',
+            end: 'bottom top',
+            scrub: 1.5
+          }
+        });
+      }
+
+      /* ─── GALLERY STAGGER REVEAL ───────────────────────────── */
+      function initGalleryReveal() {
+        if (prefersReduced) return;
+        var items = document.querySelectorAll('#gallery-grid .gallery-item');
+        items.forEach(function (item, i) {
+          gsap.set(item, { opacity: 0, y: 18 });
+          ScrollTrigger.create({
+            trigger: item,
+            start: 'top 90%',
+            once: true,
+            onEnter: function () {
+              gsap.to(item, {
+                opacity: 1,
+                y: 0,
+                duration: 0.85,
+                ease: 'power3.out',
+                delay: (i % 3) * 0.08
+              });
+            }
+          });
+        });
+      }
+
+      /* ─── VALUE CARDS STAGGER ──────────────────────────────── */
+      function initValuesReveal() {
+        if (prefersReduced) return;
+        var cards = document.querySelectorAll('.value-card');
+        cards.forEach(function (card, i) {
+          gsap.set(card, { opacity: 0, y: 24 });
+          ScrollTrigger.create({
+            trigger: card,
+            start: 'top 88%',
+            once: true,
+            onEnter: function () {
+              gsap.to(card, {
+                opacity: 1,
+                y: 0,
+                duration: 1.0,
+                ease: 'power3.out',
+                delay: i * 0.10
+              });
+            }
+          });
+        });
+      }
+
+      /* ─── HERO EYEBROW + TAGLINE FADE ──────────────────────── */
+      function animateHeroSupport() {
+        if (prefersReduced) return;
+        var eyebrow  = document.querySelector('.hero-eyebrow');
+        var tagline  = document.querySelector('.hero-tagline-main');
+        var location = document.querySelector('.hero-location');
+
+        [eyebrow, tagline, location].forEach(function (el, i) {
+          if (!el) return;
+          gsap.set(el, { opacity: 0, y: 14 });
+          gsap.to(el, {
+            opacity: 1, y: 0,
+            duration: 0.85,
+            ease: 'power3.out',
+            delay: 0.15 + i * 0.12
+          });
+        });
+      }
+
+      /* ─── ISLAND FACTS COUNT-UP ────────────────────────────── */
+      function initCountUp() {
+        // purely decorative, facts are text not numbers — skip
+      }
+
+      /* ─── INIT ALL ─────────────────────────────────────────── */
+      function init() {
+        splitAndAnimateHeroH1();
+        animateHeroGrid();
+        animateHeroSupport();
+        initReveal();
+        initIslandParallax();
+        initGalleryReveal();
+        initValuesReveal();
+
+        // Refresh ScrollTrigger after all layout is settled
+        if (!prefersReduced) {
+          setTimeout(function () { ScrollTrigger.refresh(); }, 400);
+        }
+      }
+
+      // Run on DOM ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+
+      // Cleanup on resize (debounced)
+      var resizeTimer;
+      window.addEventListener('resize', function () {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(function () {
+          if (!prefersReduced && ScrollTrigger) ScrollTrigger.refresh();
+        }, 250);
+      });
+
+    }());
+  </script>
+</body>
+</html>
